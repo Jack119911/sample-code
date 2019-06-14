@@ -2,33 +2,14 @@ import java.util.Random;
 
 public class LetterGenerator {
 
-    private String currentLetter;
-    private String[] questions = {
-            "Wie steht es um Ihre Gesundheit?",
-            "Haben Sie das Fu\u00dfballspiel gestern Abend gesehen?",
-            "Wie geht es der Familie?",
-            "Kennen Sie schon den neuen Film mit Leonardo DiCaprio",
-            "Wie ist das Wetter bei Ihnen?"
-    };
-    private String[] statements = {
-            "Meine Frau hat gestern einen fantastischen Apfelkuchen gebacken.",
-            "Beim Wandern gestern konnte ich mich sehr entspannen.",
-            "Der neue Schirach ist ein wahres Meisterwerk.",
-            "Die letzten Jahre habe ich den Jazz f\u00fcr mich entdeckt.",
-            "Im n\u00e4chsten Sommer machen wir Urlaub in Island"
-    };
+    private StringBuilder currentLetter;
 
-
-    public LetterGenerator() {
-
-    }
-
-    public String generateLetter(String greeting, boolean isReplyToLetter) {
-        currentLetter = "";
+    public String generateLetter(String greeting, boolean isReplyToLetter, int lengthInLines) {
+        currentLetter = new StringBuilder();
         generateGreeting(greeting);
-        generateBody(isReplyToLetter);
+        generateBody(isReplyToLetter, lengthInLines);
         generateRegards();
-        return currentLetter;
+        return currentLetter.toString();
     }
 
     private void generateGreeting(String greeting) {
@@ -36,38 +17,38 @@ public class LetterGenerator {
         addNewLine();
     }
 
-    private void generateBody(boolean isReplyToLetter) {
+    private void generateBody(boolean isReplyToLetter, int lengthInLines) {
         if (isReplyToLetter) {
             generateThankYou();
         }
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < lengthInLines; i++) {
             generateSentence();
         }
     }
 
     private void generateThankYou() {
-        addLineToLetter("Vielen Dank für Ihren Brief, er war mir eine große Freude.");
+        addLineToLetter(LetterBlocks.THANK_YOU);
     }
 
     private void generateSentence() {
-        if (shouldGenerateSentence()) {
+        if (shouldGenerateStatement()) {
             generateStatement();
         } else {
             generateQuestion();
         }
     }
 
-    private boolean shouldGenerateSentence() {
+    private boolean shouldGenerateStatement() {
         return Math.random() < 0.6;
     }
 
     private void generateQuestion() {
-        String randomQuestion = getRandomEntry(questions);
+        String randomQuestion = getRandomEntry(LetterBlocks.QUESTIONS);
         addLineToLetter(randomQuestion);
     }
 
     private void generateStatement() {
-        String randomStatement = getRandomEntry(statements);
+        String randomStatement = getRandomEntry(LetterBlocks.STATEMENTS);
         addLineToLetter(randomStatement);
     }
 
@@ -78,7 +59,7 @@ public class LetterGenerator {
 
     private void generateRegards() {
         addNewLine();
-        addLineToLetter("Viele Gr\u00fc\u00dfe,");
+        addLineToLetter(LetterBlocks.REGARDS);
     }
 
     private void addLineToLetter(String line) {
@@ -87,11 +68,11 @@ public class LetterGenerator {
     }
 
     private void addNewLine() {
-        addToLetter("\n");
+        addToLetter(LetterBlocks.LINE_BREAK);
     }
 
     private void addToLetter(String toAdd) {
-        currentLetter += toAdd;
+        currentLetter.append(toAdd);
     }
 
 }
