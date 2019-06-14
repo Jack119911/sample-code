@@ -23,10 +23,10 @@ public class LetterGenerator {
 
     }
 
-    public String generateLetter(String sirName, boolean isMale) {
+    public String generateLetter(String sirName, boolean isMale, boolean isResponse) {
         currentLetter = "";
         generateGreeting(sirName, isMale);
-        generateBody();
+        generateBody(isResponse);
         generateRegards();
         return currentLetter;
     }
@@ -40,18 +40,29 @@ public class LetterGenerator {
         addNewLine();
     }
 
-    private void generateBody() {
+    private void generateBody(boolean isResponse) {
+        if (isResponse) {
+            generateThankYou();
+        }
         for(int i = 0; i < 5; i++) {
             generateSentence();
         }
     }
 
+    private void generateThankYou() {
+        addLineToLetter("Vielen Dank für Ihren Brief, er war mir eine große Freude.");
+    }
+
     private void generateSentence() {
-        if (Math.random() < 0.6) {
+        if (shouldGenerateSentence()) {
             generateStatement();
         } else {
             generateQuestion();
         }
+    }
+
+    private boolean shouldGenerateSentence() {
+        return Math.random() < 0.6;
     }
 
     private void generateQuestion() {
