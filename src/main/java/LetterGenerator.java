@@ -23,25 +23,21 @@ public class LetterGenerator {
 
     }
 
-    public String generateLetter(String sirName, boolean isMale, boolean isResponse) {
+    public String generateLetter(String greeting, boolean isReplyToLetter) {
         currentLetter = "";
-        generateGreeting(sirName, isMale);
-        generateBody(isResponse);
+        generateGreeting(greeting);
+        generateBody(isReplyToLetter);
         generateRegards();
         return currentLetter;
     }
 
-    private void generateGreeting(String sirName, boolean isMale) {
-        if (isMale) {
-            addLineToLetter("Sehr geehrter Herr " + sirName);
-        } else {
-            addLineToLetter("Sehr geehrte Frau " + sirName);
-        }
+    private void generateGreeting(String greeting) {
+        addLineToLetter(greeting);
         addNewLine();
     }
 
-    private void generateBody(boolean isResponse) {
-        if (isResponse) {
+    private void generateBody(boolean isReplyToLetter) {
+        if (isReplyToLetter) {
             generateThankYou();
         }
         for(int i = 0; i < 5; i++) {
