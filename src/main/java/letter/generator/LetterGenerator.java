@@ -1,10 +1,12 @@
+package letter.generator;
+
 import java.util.Random;
 
-public class LetterGenerator {
+class LetterGenerator {
 
     private StringBuilder currentLetter;
 
-    public String generateLetter(String greeting, boolean isReplyToLetter, int lengthInLines) {
+    String generateLetter(String greeting, boolean isReplyToLetter, int lengthInLines) {// VisualizationRoot
         currentLetter = new StringBuilder();
         generateGreeting(greeting);
         generateBody(isReplyToLetter, lengthInLines);
@@ -18,6 +20,7 @@ public class LetterGenerator {
     }
 
     private void generateBody(boolean isReplyToLetter, int lengthInLines) {
+        // VisualizationRoot
         if (isReplyToLetter) {
             generateThankYou();
         }
