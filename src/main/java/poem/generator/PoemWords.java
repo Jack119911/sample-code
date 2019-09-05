@@ -1,6 +1,6 @@
 package poem.generator;
 
-public class PoemWords {
+class PoemWords {
 
     private PoemWords() {}
 
