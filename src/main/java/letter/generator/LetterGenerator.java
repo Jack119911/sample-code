@@ -6,7 +6,7 @@ class LetterGenerator {
 
     private StringBuilder currentLetter;
 
-    String generateLetter(String greeting, boolean isReplyToLetter, int lengthInLines) {// VisualizationRoot
+    String generateLetter(String greeting, boolean isReplyToLetter, int lengthInLines) {
         currentLetter = new StringBuilder();
         generateGreeting(greeting);
         generateBody(isReplyToLetter, lengthInLines);
