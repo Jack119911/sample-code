@@ -37,8 +37,8 @@ class TicTacToe {
 
     private boolean markLastBoxOfCompletableRow(Field field, BoxState boxStateToCheck) {
         for (int i = 0; i <= 2; i++) {
-            Position[] rowHorizontal =  {new Position(0, i), new Position(1, i), new Position(2, i)};
-            Position[] rowVertical =    {new Position(i, 0), new Position(i, 1), new Position(i, 2)};
+            Position[] rowHorizontal = getRowHorizontal(i);
+            Position[] rowVertical = getRowVertical(i);
             if (rowCanBeCompleted(field, rowHorizontal, boxStateToCheck)) {
                 markEmptyBoxOfRow(field, rowHorizontal);
                 return true;
@@ -48,6 +48,14 @@ class TicTacToe {
             }
         }
         return false;
+    }
+
+    private Position[] getRowVertical(int i) {
+        return new Position[]{new Position(i, 0), new Position(i, 1), new Position(i, 2)};
+    }
+
+    private Position[] getRowHorizontal(int i) {
+        return new Position[]{new Position(0, i), new Position(1, i), new Position(2, i)};
     }
 
     private boolean rowCanBeCompleted(Field field, Position[] positions, BoxState toComplete) {
