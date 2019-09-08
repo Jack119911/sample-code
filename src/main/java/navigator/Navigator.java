@@ -106,9 +106,9 @@ class Navigator {
 
     private double calculateTime(NodeConnection connection) {
         if (byCar) {
-            return calculateTimeWithCar(connection);
-        } else {
             return calculateTimeWithoutCar(connection);
+        } else {
+            return calculateTimeWithCar(connection);
         }
 
     }

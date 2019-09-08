@@ -68,7 +68,7 @@ public class PaintingComponent extends JComponent {
 
     private void paintNature(Graphics2D graphics2D) {
         paintGrass(graphics2D);
-        paintTrees(graphics2D);
+        paintSingleTree(graphics2D);
     }
 
     private void paintGrass(Graphics2D graphics2D) {
